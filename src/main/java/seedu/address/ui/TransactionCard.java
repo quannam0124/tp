@@ -9,6 +9,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.transaction.BuyTransaction;
 import seedu.address.model.transaction.Transaction;
 
+
 /**
  * A UI component that displays information of a {@code Transaction}.
  */
@@ -38,6 +39,8 @@ public class TransactionCard extends UiPart<Region> {
     private Label quantity;
     @FXML
     private FlowPane transactionType;
+    private Label buy = new Label("Buy");
+    private Label sell = new Label("Sell");
 
     /**
      * Creates a {@code TransactionCode} with the given {@code Transaction} and index to display
@@ -49,8 +52,12 @@ public class TransactionCard extends UiPart<Region> {
         good.setText(transaction.getGoods().toString());
         price.setText(transaction.getPrice().toString());
         quantity.setText(transaction.getQuantity().toString());
-        String typeOfTransaction = transaction instanceof BuyTransaction ? "Buy" : "Sell";
-        transactionType.getChildren().add(new Label(typeOfTransaction));
+        Label typeOfTransaction = transaction instanceof BuyTransaction
+                ? buy
+                : sell;
+        buy.setId("buy");
+        sell.setId("sell");
+        transactionType.getChildren().add(typeOfTransaction);
     }
 
     @Override

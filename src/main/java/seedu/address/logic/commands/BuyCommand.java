@@ -1,10 +1,12 @@
 package seedu.address.logic.commands;
 
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GOODS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
+
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
+
 
 import java.util.List;
 
@@ -45,7 +47,7 @@ public class BuyCommand extends Command {
     private final Transaction transaction;
 
     /**
-     * @param index of the company in the company list to add the POC to
+     * @param index       of the company in the company list to add the POC to
      * @param transaction to be added
      */
     public BuyCommand(Index index, Transaction transaction) {
@@ -71,16 +73,19 @@ public class BuyCommand extends Command {
         editedCompany.addTransaction(transaction);
         model.setCompany(companyToEdit, editedCompany);
 
+        model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedCompany, transaction.getQuantity(),
                 transaction.getGoods(), transaction.getPrice()));
+
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof BuyCommand // instanceof handles nulls
+                || (other instanceof CreateCommand // instanceof handles nulls
                 && index.equals(((BuyCommand) other).index)
                 && transaction.equals(((BuyCommand) other).transaction));
     }
+
 
 }

@@ -31,7 +31,6 @@ public abstract class Transaction {
     public Price getPrice() {
         return price;
     }
-
     public Quantity getQuantity() {
         return quantity;
     }

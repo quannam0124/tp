@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GOODS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
+
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -21,8 +23,8 @@ public class SellCommand extends Command {
     public static final String COMMAND_WORD = "sell";
 
     //Update here
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a transaction and links to the company. "
-            + "Parameters: "
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a transaction and links to the company. "+ "Parameters: "
             + "Index "
             + PREFIX_QUANTITY + "QUANTITY "
             + PREFIX_GOODS + "GOODS "
@@ -50,10 +52,8 @@ public class SellCommand extends Command {
     public SellCommand(Index index, Transaction transaction) {
         requireNonNull(index);
         requireNonNull(transaction);
-
         this.index = index;
         this.transaction = transaction;
-
     }
 
     @Override
@@ -71,15 +71,17 @@ public class SellCommand extends Command {
         Company editedCompany = companyToEdit;
         editedCompany.addTransaction(transaction);
         model.setCompany(companyToEdit, editedCompany);
+        model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedCompany, transaction.getQuantity(),
                 transaction.getGoods(), transaction.getPrice()));
+
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SellCommand // instanceof handles nulls
+                || (other instanceof CreateCommand // instanceof handles nulls
                 && index.equals(((SellCommand) other).index)
                 && transaction.equals(((SellCommand) other).transaction));
     }

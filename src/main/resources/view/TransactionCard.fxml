@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="transactionCardPane" fx:id="transactionCardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="transactionCardPane" fx:id="transactionCardPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
@@ -25,7 +25,7 @@
                 </Label>
                 <Label fx:id="good" styleClass="cell_big_label" text="\$first" />
             </HBox>
-            <FlowPane fx:id="transactionType" />
+            <FlowPane fx:id="transactionType" hgap="100.0" />
             <Label fx:id="price" styleClass="cell_small_label" text="\$price" />
             <Label fx:id="quantity" styleClass="cell_small_label" text="\$quantity" />
             <padding>

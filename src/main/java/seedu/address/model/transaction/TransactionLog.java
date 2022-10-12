@@ -41,6 +41,9 @@ public class TransactionLog {
      */
     public double calculateNetTransacted() {
         double result = 0;
+        if (transactionList.isEmpty()) {
+            return result;
+        }
         for (Transaction t : transactionList) {
             result += t.totalCost();
         }
@@ -58,7 +61,6 @@ public class TransactionLog {
     public boolean isEmpty() {
         return transactionList.isEmpty();
     }
-
     /**
      * Creates an observable list of transactions to be used by MainWindow
      * @return an unmodifiableObservableList of transactions
@@ -70,5 +72,4 @@ public class TransactionLog {
         }
         return FXCollections.unmodifiableObservableList(internalList);
     }
-
 }
